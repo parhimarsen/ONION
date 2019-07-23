@@ -53,6 +53,12 @@
     <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Swashbuckle.Core.5.6.0\lib\net40\Swashbuckle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -72,6 +78,9 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="Unity.WebApi, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.WebApi.5.1.5.2\lib\net45\Unity.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -96,14 +105,21 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\GetUsersRequest.cs" />
-    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Mappers\AccountModelToDomainMapper.cs" />
+    <Compile Include="Mappers\ClientModelToDomainMapper.cs" />
+    <Compile Include="Mappers\DomainToAccountModelMapper.cs" />
+    <Compile Include="Mappers\DomainToClientModelMapper.cs" />
+    <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\ClientModel.cs" />
+    <Compile Include="Models\GetAllRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -119,17 +135,13 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Domain\Users.Domain.csproj">
-      <Project>{25022ea7-3922-489e-ad85-7d35bcc21a94}</Project>
-      <Name>Users.Domain</Name>
+    <ProjectReference Include="..\Clients.DependencyInjection\Clients.DependencyInjection.csproj">
+      <Project>{37c0d24f-c9c1-40b1-a5a1-f4167ab99647}</Project>
+      <Name>Clients.DependencyInjection</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Users.DependencyInjection\Users.DependencyInjection.csproj">
-      <Project>{0c914064-4c6c-43b6-9e65-5f21c4f360d1}</Project>
-      <Name>Users.DependencyInjection</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Users.Infrastructure\Users.Infrastructure.csproj">
-      <Project>{2c5a694d-f6d2-426a-aba9-6e8a6212afc6}</Project>
-      <Name>Users.Infrastructure</Name>
+    <ProjectReference Include="..\Clients.Domain\Clients.Domain.csproj">
+      <Project>{544ab947-20b5-4f7f-bb6e-9dc0cfb783a4}</Project>
+      <Name>Clients.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -5,9 +5,10 @@ using System.Web;
 
 namespace UsersApi.Models
 {
-    public class GetUsersRequest
+    public class GetAllRequest
     {
-        public int? Limit { get; set; } = 5;
-        public int? Offser { get; set; }
+        public int? Limit { get; set; }
+
+        public int? Offset { get; set; }
     }
 }

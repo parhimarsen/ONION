@@ -1,8 +1,8 @@
 using Microsoft.Practices.Unity;
 using System.Web.Http;
+using Clients.DependencyInjection;
+using Clients.DependencyInjection.Moduls;
 using Unity.WebApi;
-using Users.DependencyInjection;
-using Users.DependencyInjection.Moduls;
 
 namespace UsersApi
 {
@@ -10,17 +10,18 @@ namespace UsersApi
     {
         public static void RegisterComponents()
         {
-			var container = new UnityContainer();
-            
-            Register<DomainModule>(container);
-            Register<InfrastructureModule>(container);
-            
+            var container = new UnityContainer();
+
+            Registrate<DomainModule>(container);
+            Registrate<InfrastructureModule>(container);
+
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
 
-        public static void Register<T>(IUnityContainer container) where T : IModule, new()
+        public static void Registrate<T>(IUnityContainer container) where T : IModule, new ()
         {
-            new T().Register(container);
+            new T().Registrate(container);
         }
+
     }
 }
