@@ -35,21 +35,21 @@ namespace UsersApi.Controllers
                 Offset = filter.Offset ?? 0
             });
 
-            return accounts.Select(_ => _.ToModel());
+            return accounts.Select(_ => _?.ToModel());
         }
 
         [HttpGet]
         [Route("{accountId:int}")]
         public AccountModel GetAccount(int accountId)
         {
-            return _accountsService.GetAccount(accountId).ToModel();
+            return _accountsService.GetAccount(accountId)?.ToModel();
         }
 
         [HttpPost]
         [Route("createaccount")]
         public AccountModel CreateAccount(AccountModel account)
         {
-            _accountsService.CreateAccount(account.ToDomain());
+            _accountsService.CreateAccount(account?.ToDomain());
             return account;
         }
 
@@ -64,7 +64,7 @@ namespace UsersApi.Controllers
         [Route("updateaccount")]
         public bool PutAccount(int accountId, AccountModel account)
         {
-            return _accountsService.UpdateAccount(accountId, account.ToDomain());
+            return _accountsService.UpdateAccount(accountId, account?.ToDomain());
         }
     }
 }

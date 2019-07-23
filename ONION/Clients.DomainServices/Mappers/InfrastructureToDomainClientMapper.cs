@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Clients.Domain.Models;
+﻿using Clients.Domain.Models;
 using Clients.Infrastructure.Models;
+using System;
 
 namespace Clients.DomainServices.Mappers
 {
@@ -12,6 +8,8 @@ namespace Clients.DomainServices.Mappers
     {
         public static DomainClient ToDomain(this InfrastructureClient @this)
         {
+            if (@this == null)
+                throw new ArgumentNullException();
             return new DomainClient()
             {
                 Name = @this.Name,

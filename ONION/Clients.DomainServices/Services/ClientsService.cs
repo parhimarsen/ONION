@@ -23,27 +23,27 @@ namespace Clients.DomainServices.Services
 
             var clients = _repository.Clients.GetClients(filter.Limit, filter.Offset);
 
-            return clients.Select(_ => _.ToDomain());
+            return clients.Select(_ => _?.ToDomain());
         }
 
         public DomainClient GetClient(int clientId)
         {
-            return _repository.Clients.GetClient(clientId).ToDomain();
+            return _repository.Clients.GetClient(clientId)?.ToDomain();
         }
 
         public IEnumerable<DomainAccount> GetAccountsOfClient(int clientId)
         {
-            return _repository.Accounts.GetAccountsOfClient(clientId).Select(_ => _.ToDomain());
+            return _repository.Accounts.GetAccountsOfClient(clientId).Select(_ => _?.ToDomain());
         }
 
         public DomainAccount GetAccountOfClient(int clientId, int accountId)
         {
-            return _repository.Accounts.GetAccountOfClient(clientId, accountId).ToDomain();
+            return _repository.Accounts.GetAccountOfClient(clientId, accountId)?.ToDomain();
         }
 
         public DomainClient CreateClient(DomainClient client)
         {
-            _repository.Clients.CreateClient(client.ToInfrastructure());
+            _repository.Clients.CreateClient(client?.ToInfrastructure());
             return client;
         }
 

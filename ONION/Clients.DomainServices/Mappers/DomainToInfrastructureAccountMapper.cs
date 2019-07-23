@@ -1,4 +1,5 @@
-﻿using Clients.Domain.Models;
+﻿using System;
+using Clients.Domain.Models;
 using Clients.Infrastructure.Models;
 
 namespace Clients.DomainServices.Mappers
@@ -7,6 +8,8 @@ namespace Clients.DomainServices.Mappers
     {
         public static InfrastructureAccount ToInfrastructure(this DomainAccount @this)
         {
+            if(@this == null)
+                throw new ArgumentNullException();
             return new InfrastructureAccount()
             {
                 ClientId = @this.ClientId,

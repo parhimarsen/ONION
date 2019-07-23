@@ -24,17 +24,17 @@ namespace Clients.DomainServices.Services
 
             var accounts = _repository.Accounts.GetAccounts(filter.Limit, filter.Offset);
 
-            return accounts.Select(_ => _.ToDomain());
+            return accounts?.Select(_ => _.ToDomain());
         }
 
         public DomainAccount GetAccount(int accountId)
         {
-            return _repository.Accounts.GetAccount(accountId).ToDomain();
+            return _repository.Accounts.GetAccount(accountId)?.ToDomain();
         }
 
         public DomainAccount CreateAccount(DomainAccount account)
         {
-            _repository.Accounts.CreateAccount(account.ToInfrastructure());
+            _repository.Accounts.CreateAccount(account?.ToInfrastructure());
             return account;
         }
 

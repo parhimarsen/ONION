@@ -35,7 +35,7 @@ namespace UsersApi.Controllers
                 Offset = filter.Offset ?? 0
             });
 
-            return clients.Select(_ => _.ToModel());
+            return clients.Select(_ => _?.ToModel());
         }
 
         // api/clients/1
@@ -43,7 +43,7 @@ namespace UsersApi.Controllers
         [Route("{clientId:int}")]
         public ClientModel GetClient(int clientId)
         {
-            return _clientsService.GetClient(clientId).ToModel();
+            return _clientsService.GetClient(clientId)?.ToModel();
         }
 
         // api/clients/1/accounts
@@ -51,7 +51,7 @@ namespace UsersApi.Controllers
         [Route("{clientId:int}/accounts")]
         public IEnumerable<AccountModel> GetAllAccountsOfClient(int clientId)
         {
-            return _clientsService.GetAccountsOfClient(clientId).Select(_ => _.ToModel());
+            return _clientsService.GetAccountsOfClient(clientId).Select(_ => _?.ToModel());
         }
 
         // api/clients/1/accounts/1
@@ -59,7 +59,7 @@ namespace UsersApi.Controllers
         [Route("{clientId:int}/accounts/{accountId:int}")]
         public AccountModel GetAllAccountOfClient(int clientId, int accountId)
         {
-            return _clientsService.GetAccountOfClient(clientId, accountId).ToModel();
+            return _clientsService.GetAccountOfClient(clientId, accountId)?.ToModel();
         }
 
         // POST api/
@@ -67,7 +67,7 @@ namespace UsersApi.Controllers
         [Route("createclient")]
         public ClientModel PostClient(ClientModel client)
         {
-            _clientsService.CreateClient(client.ToDomain());
+            _clientsService.CreateClient(client?.ToDomain());
             return client;
         }
 
@@ -76,7 +76,7 @@ namespace UsersApi.Controllers
         [Route("updateclient")]
         public bool PutClient(int clientId, ClientModel client)
         {
-            return _clientsService.UpdateClient(clientId, client.ToDomain());
+            return _clientsService.UpdateClient(clientId, client?.ToDomain());
         }
 
         // DELETE api/
